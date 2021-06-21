@@ -29,8 +29,8 @@ public class Websites {
         for (Map<String, Website> website : this.getWebsites()) {
             for (Map.Entry<String, Website> entry : website.entrySet()) {
                 if (entry.getKey() == websiteName) {
-                    List<Book> websiteBooks = entry.getValue().getBooks();
-                    for (Book book : websiteBooks) {
+                    List<BookDTO> websiteBooks = entry.getValue().getBooks();
+                    for (BookDTO book : websiteBooks) {
                         if (book.getBookTitle().equals(expectedTitle)) {
                             result = true;
                         }
