@@ -5,61 +5,79 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Map;
 
-public class Websites {
+public class WebsitesDTO {
     @JsonProperty("websites")
-    private List<Map<String, Website>> websites;
+    private List<Map.Entry<String, WebsiteDTO>> websites;
 
-    public Websites(){}
+    public WebsitesDTO() {
+    }
 
-    public Websites(List<Map<String, Website>> websites) {
+    public WebsitesDTO(List<Map.Entry<String, WebsiteDTO>> websites) {
         this.websites = websites;
     }
 
-    public List<Map<String, Website>> getWebsites() {
+    public List<Map.Entry<String, WebsiteDTO>> getWebsites() {
         return websites;
     }
 
-    public void setWebsites(List<Map<String, Website>> websites) {
+    public void setWebsites(List<Map.Entry<String, WebsiteDTO>> websites) {
         this.websites = websites;
     }
 
 
-    public boolean searchTitleOnExactWebsite(String websiteName, String expectedTitle) {
+//    public boolean searchTitleOnExactWebsite(String websiteName, String expectedTitle) {
+//        boolean result = false;
+//        for (Map<String, WebsiteDTO> website : this.getWebsites()) {
+//            for (Map.Entry<String, WebsiteDTO> entry : website.entrySet()) {
+//                if (entry.getKey() == websiteName) {
+//                    List<BookDTO> websiteBooks = entry.getValue().getBooks();
+//                    for (BookDTO book : websiteBooks) {
+//                        if (book.getBookTitle().equals(expectedTitle)) {
+//                            result = true;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return result;
+//    }
+//
+//    public int verifyTotalNumberOfBooks() {
+//        int count = 0;
+//        for (Map<String, WebsiteDTO> website : this.getWebsites()) {
+//            for (Map.Entry<String, WebsiteDTO> entry : website.entrySet()) {
+//                count += entry.getValue().getBooks().size();
+//            }
+//        }
+//        return count;
+//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        WebsitesDTO anotherWebsitesDTO = (WebsitesDTO) o;
+        if (this.hashCode() != anotherWebsitesDTO.hashCode()) return false;
+        List<Map.Entry<String, WebsiteDTO>> anotherWebsitesList = anotherWebsitesDTO.getWebsites();
         boolean result = false;
-        for (Map<String, Website> website : this.getWebsites()) {
-            for (Map.Entry<String, Website> entry : website.entrySet()) {
-                if (entry.getKey() == websiteName) {
-                    List<BookDTO> websiteBooks = entry.getValue().getBooks();
-                    for (BookDTO book : websiteBooks) {
-                        if (book.getBookTitle().equals(expectedTitle)) {
-                            result = true;
-                        }
-                    }
+        if (websites.size() == anotherWebsitesList.size()) {
+            for (int i = 0; i < websites.size(); i++) {
+                if (!(websites.get(i).getKey().equals(anotherWebsitesList.get(i).getKey())
+                        && websites.get(i).getValue().equals(anotherWebsitesList.get(i).getValue()))) {
+                    result = false;
                 }
+               result = true;
             }
-        }
+        } else return false;
         return result;
     }
 
-    public int verifyTotalNumberOfBooks() {
-        int count = 0;
-        for (Map<String, Website> website : this.getWebsites()) {
-            for (Map.Entry<String, Website> entry : website.entrySet()) {
-                count += entry.getValue().getBooks().size();
-            }
-        }
-        return count;
-    }
-
     @Override
-    public String toString() {
-        StringBuffer str = new StringBuffer();
-        for(Map<String, Website> website : websites)
-        {
-                str.append("\n");
-                str.append(str.toString() + "\n");
+    public int hashCode() {
+        int result = 0;
+        for (Map.Entry<String, WebsiteDTO> website : websites) {
+            result = 37 * result + website.getValue().hashCode() + website.getKey().hashCode();
         }
-        return str.toString();
+        return result;
     }
-
 }

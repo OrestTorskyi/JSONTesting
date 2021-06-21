@@ -1,15 +1,15 @@
 package tools;
 
 
-public class Book {
+public class BookDTO {
 
     private String author;
     private String bookTitle;
 
-    public Book() {
+    public BookDTO() {
     }
 
-    public Book(String author, String bookTitle) {
+    public BookDTO(String author, String bookTitle) {
         this.author = author;
         this.bookTitle = bookTitle;
     }
@@ -35,7 +35,7 @@ public class Book {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Book anotherBook = (Book) o;
+        BookDTO anotherBook = (BookDTO) o;
         int first = this.hashCode();
         int test = anotherBook.hashCode();
         if (first != test) return false;

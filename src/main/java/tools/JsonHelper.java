@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 
-public class JsonParser {
+public class JsonHelper {
 
-    public static Websites parseJSON() throws IOException {
-        Websites websites = null;
+    public static WebsitesDTO parseJSON() throws IOException {
+        WebsitesDTO websites = null;
         ObjectMapper objectMapper = new ObjectMapper();
-        websites = objectMapper.readValue(new File("D:/TAQC_Academy/JSONTesting/jsonTask.json"), Websites.class);
+        websites = objectMapper.readValue(new File("D:/TAQC_Academy/JSONTesting/jsonTask.json"), WebsitesDTO.class);
         return websites;
     }
 
