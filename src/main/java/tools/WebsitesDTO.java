@@ -25,32 +25,28 @@ public class WebsitesDTO {
     }
 
 
-//    public boolean searchTitleOnExactWebsite(String websiteName, String expectedTitle) {
-//        boolean result = false;
-//        for (Map<String, WebsiteDTO> website : this.getWebsites()) {
-//            for (Map.Entry<String, WebsiteDTO> entry : website.entrySet()) {
-//                if (entry.getKey() == websiteName) {
-//                    List<BookDTO> websiteBooks = entry.getValue().getBooks();
-//                    for (BookDTO book : websiteBooks) {
-//                        if (book.getBookTitle().equals(expectedTitle)) {
-//                            result = true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return result;
-//    }
-//
-//    public int verifyTotalNumberOfBooks() {
-//        int count = 0;
-//        for (Map<String, WebsiteDTO> website : this.getWebsites()) {
-//            for (Map.Entry<String, WebsiteDTO> entry : website.entrySet()) {
-//                count += entry.getValue().getBooks().size();
-//            }
-//        }
-//        return count;
-//    }
+    public boolean searchTitleOnExactWebsite(String websiteName, String expectedTitle) {
+        boolean result = false;
+        for (Map.Entry<String, WebsiteDTO> website : this.getWebsites()) {
+                if (website.getKey() == websiteName) {
+                    List<BookDTO> websiteBooks = website.getValue().getBooks();
+                    for (BookDTO book : websiteBooks) {
+                        if (book.getBookTitle().equals(expectedTitle)) {
+                            result = true;
+                        }
+                    }
+                }
+        }
+        return result;
+    }
+
+    public int verifyTotalNumberOfBooks() {
+        int count = 0;
+        for (Map.Entry<String, WebsiteDTO> website : this.getWebsites()) {
+                count += website.getValue().getBooks().size();
+        }
+        return count;
+    }
 
     @Override
     public boolean equals(Object o) {
